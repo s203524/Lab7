@@ -47,12 +47,26 @@ public class DizionarioController {
 
     @FXML
     void doFindTuttiConnessi(ActionEvent event) {
-
+    	txtOutput.setText("");
+    	String stampa = "";
+    	for(String s: model.GraphExplorer(txtCercaParola.getText())){
+    		stampa += s + "\n";
+    	}
+    	txtOutput.setText(stampa);
     }
 
     @FXML
     void doFindVicini(ActionEvent event) {
-
+    	String s = txtCercaParola.getText();
+    	String stampa="";
+    	if(s.length()!=Integer.parseInt(txtNumLettere.getText())){
+    		txtOutput.setText("Parola con numero lettere errato!");
+    		return;
+    	}
+    	for(String tempS: model.FindNeighbor(s)){
+    		stampa+=tempS + "\n"; 
+    	}
+    	txtOutput.setText(stampa);
     }
 
     @FXML
@@ -73,7 +87,9 @@ public class DizionarioController {
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	txtNumLettere.setText("");
+    	txtCercaParola.setText("");
+    	txtOutput.setText("");
     }
 
     @FXML
